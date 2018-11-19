@@ -1,4 +1,7 @@
+package database;
+
 import java.util.List;
+import java.lang.Class;
 
 public interface IDatabase {
 
@@ -11,7 +14,7 @@ public interface IDatabase {
      * @param <T> the type of the object to be read
      * @return a list of objects of type T
      */
-    public <T> List<T> readAll(T clazz, int from, int to);
+    public <T> List<T> readAll(Class<T> clazz, int from, int to);
 
     /**
      * Reads a single object from the database.
@@ -22,7 +25,7 @@ public interface IDatabase {
      * @param <T> The type of the object to be read
      * @return An object of type T
      */
-    public <T> T read(T clazz, int ranking, String username);
+    public <T> T read(Class<T> clazz, int ranking, String username);
 
     /**
      * Writes an object to the database.
