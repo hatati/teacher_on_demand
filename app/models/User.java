@@ -1,5 +1,6 @@
 package models;
 
+
 public abstract class User {
 
     public final String id;

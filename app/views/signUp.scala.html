@@ -1,0 +1,41 @@
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+</head>
+
+<body>
+<!-- Start of Form -->
+<form action="index.html" method="post">
+    <h1>Sign Up</h1>
+    <fieldset>
+        <legend><span class="number">1</span>Type</legend>
+        <input type="radio" id="university" value="university" name="uni_teacher">
+        <label for="university" class="light">University</label><br>
+        <input type="radio" id="teacher" value="teacher" name="uni_teacher">
+        <label for="teacher" class="light">Teacher</label>
+    </fieldset>
+    
+    <fieldset>
+        <legend><span class="number">2</span> Your basic info</legend>
+        <label for="name">Name:</label>
+            <input type="text" id="name" name="user_name">
+        <label for="city">City:</label>
+            <input type="text" id="city" name="user_city">
+        <label for="mail">Email:</label>
+            <input type="email" id="mail" name="user_email">
+        <label for="password">Password:</label>
+            <input type="password" id="password" name="user_password">
+        <label for="password_repeat">Repeat password:</label>
+            <input type="password" id="password_repeat" name="user_password">
+    </fieldset>
+
+
+    <button type="submit">Sign Up</button>
+</form>
+</body>
+</html>
+
