@@ -153,6 +153,8 @@ label.light {
  input[type="password"],
  input[type="email"],
  input[type="number"],
+ input[type="date"],
+ input[type="file"],
  textarea,
  select {
   background: rgba(255,255,255,0.1);
