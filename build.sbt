@@ -12,6 +12,6 @@ libraryDependencies ++= Seq( javaJdbc , cache , javaWs )
 
 libraryDependencies += "javax.xml.bind" % "jaxb-api" % "2.1"
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+libraryDependencies += "org.mongodb" % "mongodb-driver-sync" % "3.9.1"
 
-      
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  

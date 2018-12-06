@@ -1,5 +1,8 @@
 package database;
 
+import models.Idable;
+import models.Jsonable;
+
 import java.util.List;
 import java.lang.Class;
 
@@ -14,7 +17,7 @@ public interface IDatabase {
      * @param <T> the type of the object to be read
      * @return a list of objects of type T
      */
-    public <T> List<T> readAll(Class<T> clazz, int from, int to);
+    public <T extends Jsonable> List<T> readAll(Class<T> clazz, int from, int to);
 
     /**
      * Reads a single object from the database.
@@ -25,7 +28,7 @@ public interface IDatabase {
      * @param <T> The type of the object to be read
      * @return An object of type T
      */
-    public <T> T read(Class<T> clazz, int ranking, String username);
+    public <T extends Jsonable> T read(Class<T> clazz, int ranking, String username);
 
     /**
      * Writes an object to the database.
@@ -33,7 +36,7 @@ public interface IDatabase {
      * @param object the object to be written.
      * @param <T> the type of the object
      */
-    public <T> void write(T object);
+    public <T extends Jsonable> void write(T object);
 
     /**
      * Deletes an object in the database.
@@ -41,7 +44,7 @@ public interface IDatabase {
      * @param object the object to be deleted
      * @param <T> the type of the object
      */
-    public <T> void delete(T object);
+    public <T extends Jsonable & Idable> void delete(T object);
 
     /**
      * Updates an object in the database.
@@ -49,5 +52,5 @@ public interface IDatabase {
      * @param object the object to be updated
      * @param <T> the type of the object
      */
-    public <T> void update(T object);
+    public <T extends Jsonable & Idable> void update(T object);
 }
