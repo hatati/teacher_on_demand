@@ -6,7 +6,7 @@ import models.Jsonable;
 import java.util.List;
 import java.lang.Class;
 
-public interface IDatabase {
+public interface IDatabase  {
 
     /**
      * Reads a range of objects from the database.

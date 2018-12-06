@@ -8,5 +8,10 @@ GET		/view/teachers				controllers.TeacherViewController.presentTeacherList()
 POST	/get/teachers				controllers.TeacherViewController.teachersFromDatabase()
 
 
+GET     /login                      controllers.LogInController.index
+
+GET     /signUp                      controllers.SignUpController.index
+POST    /signUp                     controllers.SignUpController.postData
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
