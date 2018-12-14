@@ -81,7 +81,9 @@
                 <p class="text">` + teacher.description + `</p>
                 <p class="label">Skills:</p>
                 <ul id="skills-list">
-                </ul>     
+                </ul>                     
+                <p class="label">Contact:</p>
+                <p>+45 00 00 00 00</p>
               </div>
             </div>`;
 
