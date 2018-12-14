@@ -1,9 +1,4 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/*
     Created on : Nov 30, 2018, 7:18:03 PM
     Author     : Anestis
 */
@@ -61,6 +56,10 @@ h1 {
   width: 100%;
   text-align: center;
   font-size: 12px;
+}
+
+.signup {
+    background-color: #19c4c1;
 }
 
 form {
@@ -143,30 +142,37 @@ label.light {
  border-radius: 100%;
 }
 
+
+
 @media screen and (min-width: 480px) {
 
- form {
-   max-width: 480px;
- }
+    form {
+        max-width: 480px;
+    }
 
- input[type="text"],
- input[type="password"],
- input[type="email"],
- input[type="number"],
- input[type="date"],
- input[type="file"],
- textarea,
- select {
-  background: rgba(255,255,255,0.1);
-  border: none;
-  font-size: 16px;
-  height: auto;
-  margin: 0;
-  outline: 0;
-  padding: 15px;
-  width: 100%;
-  background-color: #e8eeef;
-  color: #8a97a0;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-  margin-bottom: 30px;
- }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="number"],
+    input[type="date"],
+    input[type="file"],
+    textarea,
+    select {
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        font-size: 16px;
+        height: auto;
+        margin: 0;
+        outline: 0;
+        padding: 15px;
+        width: 100%;
+        background-color: #e8eeef;
+        color: #8a97a0;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+        margin-bottom: 30px;
+    }
+}
+
+.error-message {
+    color: red;
+}

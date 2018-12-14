@@ -2,16 +2,34 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET		/                           controllers.Application.index
-GET		/view/teachers				controllers.TeacherViewController.presentTeacherList()
+GET		/                           	controllers.Application.index
+GET		/view/teachers					controllers.TeacherViewController.presentTeacherList()
 
-POST	/get/teachers				controllers.TeacherViewController.teachersFromDatabase()
+POST	/get/teachers					controllers.TeacherViewController.teachersFromDatabase()
+
+GET     /login/teacher                  controllers.LoginController.loginTeacher
+POST    /login/teacher/submit           controllers.LoginController.submitTeacherLogin
+GET     /login/university               controllers.LoginController.loginUniversity
+POST    /login/univeristy/submit        controllers.LoginController.submitUniversityLogin
+
+GET     /view/profile/:username         controllers.TeacherViewController.teacherProfile(username: String)
+POST    /update/teacher                 controllers.TeacherViewController.submitUpdateTeacher()
+
+POST    /view/profile/addjob            controllers.TeacherViewController.addJob()
+POST    /view/profile/addeducation      controllers.TeacherViewController.addEducation()
+POST    /view/profile/addskill          controllers.TeacherViewController.addSkill()
 
 
-GET     /login                      controllers.LogInController.index
+GET     /signup/teacher             	controllers.SignupController.signupTeacher
+POST    /signup/teacher/submit      	controllers.SignupController.submitTeacher
+POST    /signup/teacher/addskill    	controllers.SignupController.addSkill()
+POST    /signup/teacher/addjob          controllers.SignupController.addJob()
+POST    /signup/teacher/addeducation    controllers.SignupController.addEducation()
 
-GET     /signUp                      controllers.SignUpController.index
-POST    /signUp                     controllers.SignUpController.postData
+
+GET     /signup/university          	controllers.SignupController.signupUniversity
+POST    /signup/university/submit   	controllers.SignupController.submitUniversity
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

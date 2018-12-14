@@ -1,0 +1,14 @@
+@startuml
+actor teacher
+teacher --> TeacherController : getTeacher()
+TeacherController --> IDatabase : read()
+database mongodb
+IDatabase --> mongodb : read data
+mongodb --> IDatabase : return data
+IDatabase --> TeacherController : return teacher
+TeacherController --> teacher : Result (teacher view)
+teacher --> TeacherController : submitUpdatedTeacher()
+TeacherController --> IDatabase : write()
+IDatabase --> mongodb : write user
+TeacherController --> teacher : Result (teacher view)
+@enduml

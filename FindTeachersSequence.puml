@@ -1,0 +1,10 @@
+@startuml
+actor university
+university --> TeacherController : presentTeachers()
+TeacherController --> IDatabase : readAll()
+database mongodb
+IDatabase --> mongodb : read data
+mongodb --> IDatabase : return data
+IDatabase --> TeacherController : return teachers
+TeacherController --> university : Result (teachers_view)
+@enduml

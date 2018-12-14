@@ -1,0 +1,131 @@
+@import views.formdata.TeacherFormData
+@import play.data.Form
+
+@(teacherForm: Form[TeacherFormData])
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Log in</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    </head>
+    <body>
+    @helper.form(action = routes.TeacherViewController.submitUpdateTeacher(), 'enctype -> "multipart/form-data") {
+        <h2>Your profile</h2>
+        <label for="@teacherForm("name").name">Name:</label>
+        <input type="text"
+        id="@teacherForm("name").id"
+        name="@teacherForm("name").name"
+        value="@teacherForm("name").value">
+
+        <label for="@teacherForm("city").name">City:</label>
+        <input type="text"
+        id="@teacherForm("city").id"
+        name="@teacherForm("city").name"
+        value="@teacherForm("city").value">
+
+        <label for="@teacherForm("Email").name">Email:</label>
+        <input type="email"
+        id="@teacherForm("email").id"
+        name="@teacherForm("email").name"
+        value="@teacherForm("email").value">
+
+        <label for="@teacherForm("description").name">Description:</label>
+        <textarea id="@teacherForm("description").id"
+        name="@teacherForm("description").name" required>
+        @teacherForm("description").value</textarea>
+
+        <img id="@teacherForm("image").id" src="data:image/png;base64, @teacherForm("image").value()" alt="profile image">
+
+        <label for="@teacherForm("image").name()">Change image:</label>
+        <input type="file"
+        id="@teacherForm("image").id"
+        name="@teacherForm("image").name()"
+        value="@teacherForm("image").value">
+
+
+        <label for="@teacherForm("jobs").name">Jobs:</label>
+        @helper.repeat(teacherForm("jobs"),
+            min = teacherForm("jobs").indexes().length) { referenceField =>
+            <h5>Reference</h5>
+            <input type="date"
+            id="@referenceField("start").id"
+            name="@referenceField("start").name"
+            value="@referenceField("start").value"
+            placeholder="Start: dd/mm/yy">
+            <input type="date"
+            id="@referenceField("end").id"
+            name="@referenceField("end").name"
+            value="@referenceField("end").value"
+            placeholder="End: dd/mm/yy">
+            <input type="text"
+            id="@referenceField("where").id"
+            name="@referenceField("where").name"
+            value="@referenceField("where").value"
+            placeholder="Where">
+            <input type="text"
+            id="@referenceField("description").id"
+            name="@referenceField("description").name"
+            value="@referenceField("description").value"
+            placeholder="Description">
+
+            <img id="@referenceField("image").id" src="data:image/png;base64, @referenceField("image").value" alt="profile image">
+
+            <label for="@referenceField("image").name">Change job image:</label>
+            <input type="file"
+            id="@referenceField("image").id"
+            name="@referenceField("image").name">
+        }
+
+        <label for="@teacherForm("educations").name">Education:</label>
+        @helper.repeat(teacherForm("educations"),
+            min = teacherForm("educations").indexes.length) { referenceField =>
+            <h5>Education</h5>
+            <input type="date"
+            id="@referenceField("start").id"
+            name="@referenceField("start").name"
+            value="@referenceField("start").value"
+            placeholder="Start: dd/mm/yy">
+            <input type="date"
+            id="@referenceField("end").id"
+            name="@referenceField("end").name"
+            value="@referenceField("end").value"
+            placeholder="End: dd/mm/yy">
+            <input type="text"
+            id="@referenceField("where").id"
+            name="@referenceField("where").name"
+            value="@referenceField("where").value"
+            placeholder="Where">
+            <input type="text"
+            id="@referenceField("description")"
+            name="@referenceField("description").name"
+            value="@referenceField("description").value"
+            placeholder="Description">
+            <input type="file"
+            id="@referenceField("image").id"
+            name="@referenceField("image").name">
+
+            <img id="@referenceField("image").id" src="data:image/png;base64, @referenceField("image").value" alt="profile image">
+
+            <label for="@referenceField("image").name">Change job image:</label>
+            <input type="file"
+            id="@referenceField("image").id"
+            name="@referenceField("image").name">
+        }
+
+
+        <label for="@teacherForm("skills").name">Skills:</label>
+        @helper.repeat(teacherForm("skills"),
+            min = teacherForm("skills").indexes.length) { skillField =>
+            <input type="text"
+            id="@skillField.id"
+            name="@skillField.name"
+            value="@skillField.value"
+            placeholder="Describe your skill here...">
+        }
+
+
+        <button type="submit" class="signup">Save changes</button>
+    }
+    </body>
+</html>

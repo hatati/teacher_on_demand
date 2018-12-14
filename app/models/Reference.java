@@ -1,8 +1,11 @@
 package models;
 
 import org.bson.Document;
+import views.formdata.ReferenceFormData;
 
 import java.nio.Buffer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Reference implements Jsonable, Idable {
@@ -12,9 +15,9 @@ public class Reference implements Jsonable, Idable {
     public final Date end;
     public final String where;
     public final String description;
-    public final Buffer attachment;
+    public final String attachment;
 
-    public Reference(String id, Date start, Date end, String where, String description, Buffer attachment) {
+    public Reference(String id, Date start, Date end, String where, String description, String attachment) {
         this.id = id;
         this.start = start;
         this.end = end;
@@ -30,6 +33,24 @@ public class Reference implements Jsonable, Idable {
         this.where = null;
         this.description = null;
         this.attachment = null;
+    }
+
+    public Reference(ReferenceFormData formData) {
+        this.id = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
+        Date start = null;
+        Date end = null;
+        try {
+            start = dateFormat.parse(formData.getStart());
+            end = dateFormat.parse(formData.getEnd());
+        } catch (ParseException exception) {
+            System.out.println("Couldn't parse dates");
+        }
+        this.start = start;
+        this.end = end;
+        this.where = formData.getWhere();
+        this.description = formData.getDescription();
+        this.attachment = formData.getImage();
     }
 
     @Override

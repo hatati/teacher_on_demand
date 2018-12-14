@@ -1,8 +1,10 @@
 package database;
 
+import com.mongodb.Block;
 import com.mongodb.client.*;
 import models.*;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class Database implements IDatabase {
           database = MongoClients.create().getDatabase("tod");
 
           map = new HashMap<>();
-          map.put(Reference.class, database.getCollection("references"));
+          map.put(Reference.class, database.getCollection("jobs"));
           map.put(Teacher.class, database.getCollection("teachers"));
           map.put(University.class, database.getCollection("universities"));
      }
@@ -37,7 +39,7 @@ public class Database implements IDatabase {
 
      @Override
      public <T extends Jsonable> List<T> readAll(Class<T> clazz, int from, int to) {
-          System.out.printf("\nclazz: %s, from: %d, to: %d\n", clazz.toString(), from, to);
+          System.out.printf("readAll(clazz: %s, from: %d, to: %d)\n", clazz.toString(), from, to);
 
           MongoCollection<Document> collection = map.get(clazz);
           MongoCursor<Document> cursor = collection.find().skip(from).limit(to).iterator();
@@ -64,9 +66,9 @@ public class Database implements IDatabase {
      }
 
      @Override
-     public <T extends Jsonable> T read(Class<T> clazz, int ranking, String username) {
-          MongoCollection<Document> collection = map.get(clazz.getClass());
-          Document result = collection.find(eq("username", username)).first();
+     public <T extends Jsonable> T read(Class<T> clazz, int ranking, String username) throws NullPointerException {
+          MongoCollection<Document> collection = map.get(clazz);
+          Document result = collection.find(eq("email", username)).first();
 
           try {
                return (T) clazz.getDeclaredConstructor().newInstance().fromDocument(result);
@@ -80,6 +82,7 @@ public class Database implements IDatabase {
           return null;
      }
 
+     // TODO: Remove ID on writes, and then on reads, load "_id" as the id. "_id" is packed in an object.
      @Override
      public <T extends Jsonable> void write(T object) {
           MongoCollection<Document> collection = map.get(object.getClass());
@@ -95,6 +98,6 @@ public class Database implements IDatabase {
      @Override
      public <T extends Jsonable & Idable> void update(T object) {
           MongoCollection<Document> collection = map.get(object.getClass());
-          collection.updateOne(eq("id", object.getId()), object.asDocument());
+          collection.replaceOne(eq("_id", new ObjectId(object.getId())), object.asDocument());
      }
 }

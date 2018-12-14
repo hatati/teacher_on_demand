@@ -1,0 +1,81 @@
+@startuml
+package database {
+    interface IDatabase {
+        +read(clazz: Class<T>, username: String): T
+        +readAll(clazz: Class<T>, from: int, to: int): T
+        +write(object: Object)
+        +update(object: Object)
+        +delete(object: Object)
+    }
+
+    Class Database {
+        -database: MongoDabase
+        -collectionMap: Map<Class, MongoCollection<Document>
+        -instance: Database
+        +getInstance(): IDatabase
+    }
+}
+
+package controllers {
+    class LoginController {
+        +loginTeacher(): Result
+        +loginUniversity(): Result
+        +submitTeacher(): Result
+        +submitUniversity(): Result
+    }
+
+    class SignupController {
+        +signupTeacher(): Result
+        +signupUniversity(): Result
+        +submitTeacher(): Result
+        +submitUniversity(): Result
+    }
+
+    class TeacherController {
+        +presentTeacher(id: String): Result
+        +presentTeachers():Result
+        +getTeachers(): Result
+        +submitUpdatedTeacher(): Result
+    }
+}
+
+object routes {
+    /profile/:id
+    /teachers
+    /login/teacher
+    /login/university
+    /signup/teacher
+    /signup/university
+    /submit/profile
+    /submit/login/teacher
+    /submit/login/university
+    /submit/signup/teacher
+    /submit/signup/university
+}
+
+package views {
+    object teacher_signup
+    object university_signup
+    object teacher_login
+    object university_login
+    object profile
+    object teachers
+}
+
+routes ..> controllers
+controllers ..> IDatabase
+Database ..|> IDatabase
+
+SignupController --> teacher_signup
+SignupController --> university_signup
+LoginController --> teacher_login
+LoginController --> university_login
+TeacherController --> profile
+TeacherController --> teachers
+
+university_signup --> university_login
+university_login --> teachers
+teacher_signup --> teacher_login
+teacher_login --> profile
+
+@enduml

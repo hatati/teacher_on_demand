@@ -1,0 +1,12 @@
+@startuml
+actor university
+university --> LoginController : loginUniversity()
+LoginController --> university : Result (university_login_view)
+university --> LoginController : submitUniversity()
+LoginController --> IDatabase : read()
+database mongodb
+IDatabase --> mongodb : request data
+mongodb --> IDatabase : return data
+IDatabase --> LoginController : return university
+LoginController --> university : Result (teachers_view)
+@enduml

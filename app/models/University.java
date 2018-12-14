@@ -1,6 +1,7 @@
 package models;
 
 import org.bson.Document;
+import views.formdata.UniversityFormData;
 
 public class University extends User implements Jsonable, Idable {
 
@@ -10,6 +11,10 @@ public class University extends User implements Jsonable, Idable {
 
     public University() {
         super(null, null, null, null, null );
+    }
+
+    public University(UniversityFormData formData) {
+        super(null, formData.getName(), formData.getPassword(), formData.getEmail(), formData.getCity());
     }
 
     @Override

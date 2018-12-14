@@ -1,0 +1,10 @@
+@startuml
+actor teacher
+teacher --> SignupController : signupTeacher()
+SignupController --> teacher : Result (teacher_signup_view)
+teacher --> SignupController : submitTeacher()
+SignupController --> IDatabase : write()
+database mongodb
+IDatabase --> mongodb : persist user data
+SignupController --> teacher : Result (university_signup_view)
+@enduml

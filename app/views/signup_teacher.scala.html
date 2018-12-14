@@ -1,0 +1,134 @@
+@import play.data.Form
+@import views.formdata.TeacherFormData
+
+@import views.formdata.TeacherFormData
+@(teacherSignupForm: Form[TeacherFormData])
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    </head>
+    <body>
+    @helper.form(action = routes.SignupController.submitTeacher(), 'enctype -> "multipart/form-data") {
+        <h1>Sign Up</h1>
+        <fieldset>
+            <legend><span class="number">1</span> Your basic info</legend>
+            <label for="name">Name:</label>
+            <input type="text"
+            id="@teacherSignupForm("name").id"
+            name="@teacherSignupForm("name").name"
+            value="@teacherSignupForm("name").value" required>
+            <label for="city">City:</label>
+            <input type="text"
+            id="@teacherSignupForm("city").id"
+            name="@teacherSignupForm("city").name"
+            value="@teacherSignupForm("city").value" required>
+            <label for="mail">Email:</label>
+            <input type="email"
+            id="@teacherSignupForm("id").id"
+            name="@teacherSignupForm("email").name"
+            value="@teacherSignupForm("email").value" required>
+            <label for="password">Password:</label>
+            <input type="password"
+            id="@teacherSignupForm("password").id"
+            name="@teacherSignupForm("password").name"
+            value="@teacherSignupForm("password").value" required>
+            <label for="password_repeat">Repeat password:</label>
+            <input type="password"
+            id="@teacherSignupForm("repeatPassword").id"
+            name="@teacherSignupForm("repeatPassword").name"
+            value="@teacherSignupForm("repeatPassword").value" required>
+        </fieldset>
+        <fieldset id="profile">
+            <legend><span class="number">2</span> Profile</legend>
+            <label for="description">Description:</label>
+            <textarea id="@teacherSignupForm("description").id"
+            name="@teacherSignupForm("description").name" required>
+            @teacherSignupForm("description").value</textarea>
+            <label for="image">Image:</label>
+            <input type="file"
+            id="@teacherSignupForm("image").id"
+            name="@teacherSignupForm("image").name"
+            value="@teacherSignupForm("image").value" required>
+
+            <label for="@teacherSignupForm("jobs").name">Jobs:</label>
+            @helper.repeat(teacherSignupForm("jobs"),
+                min = teacherSignupForm("jobs").indexes().length) { referenceField =>
+                <h5>Reference</h5>
+                <input type="date"
+                id="@referenceField("start").id"
+                name="@referenceField("start").name"
+                value="@referenceField("start").value"
+                placeholder="Start: dd/mm/yy">
+                <input type="date"
+                id="@referenceField("end").id"
+                name="@referenceField("end").name"
+                value="@referenceField("end").value"
+                placeholder="End: dd/mm/yy">
+                <input type="text"
+                id="@referenceField("where").id"
+                name="@referenceField("where").name"
+                value="@referenceField("where").value"
+                placeholder="Where">
+                <input type="text"
+                id="@referenceField("description").id"
+                name="@referenceField("description").name"
+                value="@referenceField("description").value"
+                placeholder="Description">
+                <input type="file"
+                id="@referenceField("image").id"
+                name="@referenceField("image").name">
+            }
+            <button type="submit" formaction="/signup/teacher/addjob" formnovalidate>Add Job</button>
+
+            <label for="@teacherSignupForm("educations").name">Education:</label>
+            @helper.repeat(teacherSignupForm("educations"),
+                min = teacherSignupForm("educations").indexes.length) { referenceField =>
+                <h5>Education</h5>
+                <input type="date"
+                id="@referenceField("start").id"
+                name="@referenceField("start").name"
+                value="@referenceField("start").value"
+                placeholder="Start: dd/mm/yy">
+                <input type="date"
+                id="@referenceField("end").id"
+                name="@referenceField("end").name"
+                value="@referenceField("end").value"
+                placeholder="End: dd/mm/yy">
+                <input type="text"
+                id="@referenceField("where").id"
+                name="@referenceField("where").name"
+                value="@referenceField("where").value"
+                placeholder="Where">
+                <input type="text"
+                id="@referenceField("description")"
+                name="@referenceField("description").name"
+                value="@referenceField("description").value"
+                placeholder="Description">
+                <input type="file"
+                id="@referenceField("image").id"
+                name="@referenceField("image").name">
+            }
+            <button type="submit" formaction="/signup/teacher/addeducation" formnovalidate>Add Education</button>
+
+            <label for="@teacherSignupForm("skills").name">Skills:</label>
+            @helper.repeat(teacherSignupForm("skills"),
+                min = teacherSignupForm("skills").indexes.length) { skillField =>
+                <input type="text"
+                id="@skillField.id"
+                name="@skillField.name"
+                value="@skillField.value"
+                placeholder="Describe your skill here...">
+            }
+            <button type="submit" formaction="/signup/teacher/addskill" formnovalidate>Add Skill</button>
+        </fieldset>
+
+        <fieldset>
+            <button type="submit" class="signup">Sign up</button>
+        </fieldset>
+    }
+    </body>
+</html>

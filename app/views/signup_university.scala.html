@@ -1,0 +1,49 @@
+@import play.data.Form
+@import views.formdata.UniversityFormData
+
+@(universitySignupForm: Form[UniversityFormData])
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+    </head>
+    <body>
+        @helper.form(action = routes.SignupController.submitUniversity()) {
+            <h1>Sign up</h1>
+            <fieldset>
+                <legend><span class="number">1</span> Your basic info</legend>
+                <label for="@universitySignupForm("name").name">Name:</label>
+                <input type="text"
+                id="@universitySignupForm("name").id"
+                name="@universitySignupForm("name").name"
+                value="@universitySignupForm("name").value">
+                <label for="@universitySignupForm("city").name">City:</label>
+                <input type="text"
+                id="@universitySignupForm("city").id"
+                name="@universitySignupForm("city").name"
+                value="@universitySignupForm("city").value">
+                <label for="@universitySignupForm("email").name">Email:</label>
+                <input type="text"
+                id="@universitySignupForm("email").id"
+                name="@universitySignupForm("email").name"
+                value="@universitySignupForm("email").value">
+                <label for="@universitySignupForm("password").name">Password:</label>
+                <input type="password"
+                id="@universitySignupForm("password").id"
+                name="@universitySignupForm("password").name"
+                value="@universitySignupForm("password").value">
+                <label for="@universitySignupForm("repeatPassword").name">Repeat password:</label>
+                <input type="password"
+                id="@universitySignupForm("repeatPassword").id"
+                name="@universitySignupForm("repeatPassword").name"
+                value="@universitySignupForm("repeatPassword").value">
+            </fieldset>
+            <fieldset>
+                <button type="submit" class="signup">Sign up</button>
+            </fieldset>
+        }
+    </body>
+</html>

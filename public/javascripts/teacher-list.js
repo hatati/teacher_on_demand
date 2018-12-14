@@ -29,12 +29,14 @@
         teachers = data;
         for (var i = 0; i < teachers.length; i++) {
             let teacher = teachers[i];
+            let educationText = teacher.educations[0] != null ? teacher.educations[0].where : "No educations specified";
+            let jobsText = teacher.jobs[0] != null ? teacher.jobs[0].where : "No jobs specified";
             let listElementString = createListElement(
                 teacher.image,
                 teacher.name,
                 teacher.email,
-                teacher.educations[0].where,
-                teacher.jobs[0].where,
+                educationText,
+                jobsText,
                 i);
 
             let listElement = htmlToElement(listElementString);
